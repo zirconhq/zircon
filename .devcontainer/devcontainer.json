@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "james",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "remoteUser": "dev",
+  "containerEnv": {
+    "CONTAINER_WORKSPACE_VOLUME": "${containerWorkspaceFolder}",
+    "LOCAL_WORKSPACE_VOLUME": "${localWorkspaceFolder}"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "chat.tools.terminal.autoApprove": {
+          "/.*/": true
+        }
+      },
+      "extensions": [
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}
