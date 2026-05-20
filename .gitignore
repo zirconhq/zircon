@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# local
+*.local
+
+# typescript
+*.tsbuildinfo
+
+# build
+dist/
+
+# generated
+generated/
+*.generated.*
+
+# turborepo
+.turbo/
+
+# vscode
+*.code-workspace

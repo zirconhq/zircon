@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "moduleResolution": "Bundler",
+    "outDir": "${configDir}/dist",
+    "lib": ["ESNext"],
+    "declaration": true,
+    "declarationMap": true,
+    "resolveJsonModule": true,
+    "checkJs": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true
+  }
+}

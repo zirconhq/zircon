@@ -1,0 +1,16 @@
+{
+  "name": "@appcited/james",
+  "packageManager": "pnpm@10.15.1",
+  "homepage": "https://github.com/appcited/james#readme",
+  "bugs": {
+    "url": "https://github.com/appcited/james/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appcited/james.git"
+  },
+  "scripts": {
+    "init": "pnpm install --frozen-lockfile",
+    "clean": "git clean -dfX"
+  }
+}

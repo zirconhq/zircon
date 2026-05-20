@@ -1,0 +1,32 @@
+{
+  "$schema": "/usr/lib/node_modules/turbo/schema.json",
+  "tasks": {
+    "//#clean": {},
+    "//#init": {},
+    "ci": {
+      "dependsOn": ["check", "build"],
+      "inputs": []
+    },
+    "init": {
+      "dependsOn": ["//#init", "^init"],
+      "inputs": ["package.json", "pnpm-lock.yaml", ".npmrc"],
+      "outputs": ["node_modules/**"]
+    },
+    "check": {
+      "dependsOn": ["init", "^build"]
+    },
+    "build": {
+      "dependsOn": ["init", "^build"],
+      "outputs": ["dist/**"]
+    },
+    "test": {
+      "dependsOn": ["init", "^build"]
+    },
+    "dev": {
+      "dependsOn": ["init", "^build"],
+      "persistent": true,
+      "interruptible": true,
+      "cache": false
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "extends": "@appcited/james-typescript/tsconfig.node.json",
+  "include": ["*", "*.json"],
+  "compilerOptions": {
+    "noEmit": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.build.tsbuildinfo"
+  }
+}

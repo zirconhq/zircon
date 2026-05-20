@@ -1,0 +1,27 @@
+{
+  "name": "@appcited/james-web",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "init": "pnpm install --frozen-lockfile",
+    "dev": "vite",
+    "build": "vite build",
+    "check": "vue-tsc --build --noEmit"
+  },
+  "dependencies": {
+    "vue": "^3.5.29",
+    "vue-router": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.11.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "@appcited/james-typescript": "workspace:*",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.13",
+    "vite-plugin-vue-devtools": "^8.1.2",
+    "vue-tsc": "^3.3.1"
+  }
+}

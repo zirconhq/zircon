@@ -18,7 +18,8 @@
         }
       },
       "extensions": [
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        "Vue.volar"
       ]
     }
   }
