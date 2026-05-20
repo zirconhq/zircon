@@ -19,7 +19,8 @@
       },
       "extensions": [
         "redhat.vscode-yaml",
-        "Vue.volar"
+        "Vue.volar",
+        "bradlc.vscode-tailwindcss"
       ]
     }
   }
