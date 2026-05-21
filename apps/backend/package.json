@@ -1,0 +1,25 @@
+{
+  "name": "@appcited/james-node",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "init": "pnpm install --frozen-lockfile",
+    "dev": "node --watch src/main.ts",
+    "build": "tsc --build tsconfig.app.json && node src/scripts/generate-openapi.ts",
+    "check": "tsc --build --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.6",
+    "@hono/zod-openapi": "^1.1.5",
+    "hono": "^4.11.1",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@appcited/james-typescript": "workspace:*",
+    "@types/node": "^24.11.0",
+    "typescript": "~6.0.3"
+  }
+}
