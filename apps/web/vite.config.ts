@@ -5,6 +5,17 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   clearScreen: false,
+  server: {
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   plugins: [
     vue(),
     tailwindcss(),

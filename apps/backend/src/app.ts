@@ -1,7 +1,15 @@
 import { OpenAPIHono } from '@hono/zod-openapi'
 
-import { healthRoute } from './routes/health.ts'
+import { healthHandler, healthRoute } from '#/src/routes/health.js'
+import { createResourceContentHandler, resourceContentRoute } from '#/src/routes/resources/content/get.js'
+import { createResourcesHandler, resourcesRoute } from '#/src/routes/resources/list.js'
 
-export const app = new OpenAPIHono()
+export const createApp = () => {
+	const app = new OpenAPIHono()
 
-app.openapi(healthRoute, (c) => c.json({ status: 'ok' }, 200))
+	app.openapi(healthRoute, healthHandler)
+	app.openapi(resourcesRoute, createResourcesHandler())
+	app.openapi(resourceContentRoute, createResourceContentHandler())
+
+	return app
+}

@@ -2,16 +2,21 @@
   "name": "@appcited/james-node",
   "version": "0.1.0",
   "type": "module",
+  "imports": {
+    "#/*.js": "./*.ts",
+    "#/*.json": "./*.json"
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "init": "pnpm install --frozen-lockfile",
-    "dev": "node --watch src/main.ts",
+    "dev": "node --inspect-port=0 --inspect --watch --watch-preserve-output src/main.ts",
     "build": "tsc --build tsconfig.app.json && node src/scripts/generate-openapi.ts",
     "check": "tsc --build --noEmit"
   },
   "dependencies": {
+    "@appcited/james-core": "workspace:*",
     "@hono/node-server": "^1.19.6",
     "@hono/zod-openapi": "^1.1.5",
     "hono": "^4.11.1",
@@ -19,7 +24,7 @@
   },
   "devDependencies": {
     "@appcited/james-typescript": "workspace:*",
-    "@types/node": "^24.11.0",
+    "@types/node": "^25.9.1",
     "typescript": "~6.0.3"
   }
 }

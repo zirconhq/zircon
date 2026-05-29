@@ -1,0 +1,8 @@
+import type { Resource } from '#/src/Resource.js'
+
+export interface ResourceProvider {
+  name: string
+
+  content(resourcePath: string): Promise<string | null>
+  list(): Promise<Resource[]>
+}

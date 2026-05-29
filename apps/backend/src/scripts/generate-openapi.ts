@@ -2,8 +2,10 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { app } from '../app.ts'
-import packageJson from '../../package.json' with { type: 'json' }
+import packageJson from '#/package.json' with { type: 'json' }
+import { createApp } from '#/src/app.js'
+
+const app = createApp()
 
 const document = app.getOpenAPI31Document({
   openapi: '3.1.0',

@@ -1,7 +1,10 @@
 import { serve } from '@hono/node-server'
-import { app } from './app.ts'
 
-const port = Number.parseInt(process.env.PORT ?? '3000', 10)
+import { createApp } from '#/src/app.js'
+
+const app = createApp()
+
+const port = 3000
 
 serve({
   fetch: app.fetch,

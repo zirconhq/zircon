@@ -33,7 +33,7 @@ RUN apt-get install -y --no-install-recommends \
 
 # nodejs
 # renovate: source=github-tags name=nodejs/node versioning=semver
-ENV NODE_VERSION=24.7.0
+ENV NODE_VERSION=26.2.0
 RUN NODE_MAJOR_VERSION=$(echo ${NODE_VERSION} | cut -d. -f1) && \
     curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x" | bash - && \
     apt-get install -y --no-install-recommends \

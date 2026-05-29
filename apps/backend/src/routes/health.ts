@@ -1,4 +1,4 @@
-import { createRoute, z } from '@hono/zod-openapi'
+import { createRoute, type RouteHandler, z } from '@hono/zod-openapi'
 
 const HealthResponseSchema = z
   .object({
@@ -22,3 +22,5 @@ export const healthRoute = createRoute({
     },
   },
 })
+
+export const healthHandler: RouteHandler<typeof healthRoute> = (c) => c.json({ status: 'ok' }, 200)
