@@ -24,8 +24,6 @@ const openView = async (routeName?: RouteRecordNameGeneric): Promise<void> => {
             :current-route-name="currentRouteName"
             @select="openView"
         />
-        <div>
-            <RouterView />
-        </div>
+        <RouterView />
     </div>
 </template>
