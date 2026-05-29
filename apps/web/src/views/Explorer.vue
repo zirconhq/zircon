@@ -7,7 +7,6 @@ import { useRouter } from 'vue-router'
 import AsyncContent from '#/src/components/AsyncContent.vue'
 import Grid from '#/src/components/Grid.vue'
 import TextRenderer from '#/src/components/TextRenderer.vue'
-import ViewBar from '#/src/components/ViewBar.vue'
 
 const props = defineProps<{
   resourceUri?: string
@@ -68,9 +67,7 @@ const openResource = async (resource: Resource): Promise<void> => {
 </script>
 
 <template>
-  <div class="flex h-dvh">
-    <ViewBar />
-    <Grid class="h-full">
+  <Grid class="h-full">
       <aside class="w-72 border-r border-gray-300 p-4">
         <h1 class="mb-3 text-sm font-semibold text-gray-950">Resources</h1>
         <AsyncContent
@@ -113,6 +110,5 @@ const openResource = async (resource: Resource): Promise<void> => {
           </AsyncContent>
         </template>
       </main>
-    </Grid>
-  </div>
+  </Grid>
 </template>

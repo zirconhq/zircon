@@ -1,17 +1,26 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory,
+  type RouteRecordRaw,
+} from 'vue-router'
+
+export const viewRoutes: RouteRecordRaw[] = [
+  {
+    path: '/explorer/:resourceUri(.*)?',
+    name: 'explorer',
+    meta: {
+      name: 'Explorer',
+    },
+    component: () => import('#/src/views/Explorer.vue'),
+    props: (route) => ({
+      resourceUri: route.params.resourceUri,
+    }),
+  },
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/explorer/:resourceUri(.*)?',
-      name: 'explorer',
-      component: () => import('#/src/views/Explorer.vue'),
-      props: (route) => ({
-        resourceUri: route.params.resourceUri,
-      }),
-    },
-  ],
+  routes: viewRoutes,
 })
 
 export default router
