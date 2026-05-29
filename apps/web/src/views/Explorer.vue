@@ -13,15 +13,14 @@ const props = defineProps<{
   resourceUri?: string
 }>()
 
-const router = useRouter()
-
+const selectedResourceUri = computed(() => props.resourceUri ?? null)
 const selectedResource = computed<Resource | null | undefined>(() => {
-  if (props.resourceUri == null) {
+  if (selectedResourceUri.value == null) {
     return null
   }
 
   return resourcesQuery.data.value?.find((candidate) =>
-    candidate.uri === props.resourceUri,
+    candidate.uri === selectedResourceUri.value,
   )
 })
 
@@ -39,7 +38,7 @@ const resourcesQuery = useQuery({
 })
 
 const resourceContentQuery = useQuery({
-  queryKey: ['resource-content', selectedResource.value?.uri],
+  queryKey: ['resource-content', selectedResourceUri],
   queryFn: async () => {
     if (selectedResource.value == null) {
       throw new Error('Selected resource could not be found')
@@ -53,10 +52,11 @@ const resourceContentQuery = useQuery({
 
     return await response.text()
   },
-  enabled: () => selectedResource.value != null,
+  enabled: computed(() => selectedResource.value != null),
   retry: false,
 })
 
+const router = useRouter()
 const openResource = async (resource: Resource): Promise<void> => {
   await router.push({
     name: 'explorer',
