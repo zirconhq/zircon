@@ -47,7 +47,7 @@ RUN npm install -g pnpm@${PNPM_VERSION}
 
 # turborepo
 # renovate: source=github-tags name=vercel/turborepo versioning=semver
-ENV TURBO_VERSION=2.5.6
+ENV TURBO_VERSION=2.9.16
 ENV TURBO_GLOBAL_WARNING_DISABLED=true
 RUN npm install -g turbo@${TURBO_VERSION}
 
