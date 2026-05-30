@@ -1,2 +1,2 @@
-export type { Resource } from '#/src/Resource.js'
-export type { ResourceProvider } from '#/src/ResourceProvider.js'
+export type { Resource } from './Resource.ts'
+export type { ResourceProvider } from './ResourceProvider.ts'

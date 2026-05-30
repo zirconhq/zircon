@@ -1,18 +1,18 @@
 {
   "name": "@appcited/james-typescript",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "imports": {
     "#/*.json": "./*.json"
+  },
+  "exports": {
+    "./*": "./dist/*"
   },
   "scripts": {
     "init": "pnpm install --frozen-lockfile",
     "build": "mkdir -p dist && cp -r src/* dist/"
-  },
-  "files": [
-    "dist"
-  ],
-  "exports": {
-    "./*": "./dist/*"
   },
   "peerDependencies": {
     "@types/node": "^25.9.1",

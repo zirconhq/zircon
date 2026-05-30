@@ -3,7 +3,7 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import packageJson from '#/package.json' with { type: 'json' }
-import { createApp } from '#/src/app.js'
+import { createApp } from '#/src/app.ts'
 
 const app = createApp()
 

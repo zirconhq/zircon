@@ -1,11 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "composite": true,
-    "outDir": "${configDir}/dist",
-    "lib": ["ESNext"],
     "declaration": true,
     "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "outDir": "${configDir}/dist",
     "resolveJsonModule": true,
     "checkJs": true,
     "skipLibCheck": true,

@@ -4,8 +4,8 @@ import { homedir } from 'node:os'
 
 import type { ResourceProvider } from '@appcited/james-core'
 
-import { FileProvider } from '#/src/providers/FileProvider.js'
-import { ConfigService } from '#/src/services/ConfigService.js'
+import { FileProvider } from '#/src/providers/FileProvider.ts'
+import { ConfigService } from '#/src/services/ConfigService.ts'
 
 const configFilePath = resolve(homedir(), '.james/config.json')
 const configFile = JSON.parse(readFileSync(configFilePath, 'utf8'))

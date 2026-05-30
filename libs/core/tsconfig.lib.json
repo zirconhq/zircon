@@ -1,0 +1,7 @@
+{
+  "extends": "@appcited/james-typescript/tsconfig.base.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "rootDir": "./src"
+  }
+}

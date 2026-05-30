@@ -1,5 +1,5 @@
 import { createRoute, type RouteHandler, z } from '@hono/zod-openapi'
-import { resourceProviders } from '#/src/bootstrap.js'
+import { resourceProviders } from '#/src/bootstrap.ts'
 
 const ResourceSchema = z
   .object({

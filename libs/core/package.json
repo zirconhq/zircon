@@ -1,20 +1,27 @@
 {
   "name": "@appcited/james-core",
   "type": "module",
-  "imports": {
-    "#/*.js": "./*.ts"
-  },
-  "scripts": {
-    "init": "pnpm install --frozen-lockfile",
-    "build": "mkdir -p dist && cp -r src/* dist/"
-  },
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": "./dist/index.ts"
+  "imports": {
+    "#/*": "./*"
   },
-  "peerDependencies": {
-    "typescript": "^6.0.0"
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "init": "pnpm install --frozen-lockfile",
+    "build": "vite build && tsc --build",
+    "check": "tsc --build --noEmit"
+  },
+  "devDependencies": {
+    "@appcited/james-typescript": "workspace:*",
+    "@types/node": "^25.9.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.13"
   }
 }

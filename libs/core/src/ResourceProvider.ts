@@ -1,4 +1,4 @@
-import type { Resource } from '#/src/Resource.js'
+import type { Resource } from './Resource.ts'
 
 export interface ResourceProvider {
   name: string

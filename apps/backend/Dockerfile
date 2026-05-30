@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY package.json ./
 COPY --from=installer /app/node_modules ./node_modules
-COPY dist/ ./src/
+COPY dist/ ./dist/
 
-CMD ["node", "./src/main.js"]
+CMD ["node", "./dist/main.js"]
