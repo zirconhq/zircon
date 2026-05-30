@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@appcited/james-core':
         specifier: workspace:*
-        version: link:../../packages/core
+        version: link:../../libs/core
       '@hono/node-server':
         specifier: ^1.19.6
         version: 1.19.14(hono@4.12.21)
@@ -26,7 +26,7 @@ importers:
     devDependencies:
       '@appcited/james-typescript':
         specifier: workspace:*
-        version: link:../../packages/typescript
+        version: link:../../libs/typescript
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1

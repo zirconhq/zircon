@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@appcited/james-core':
         specifier: workspace:*
-        version: link:../../packages/core
+        version: link:../../libs/core
       '@tanstack/vue-query':
         specifier: ^5.100.11
         version: 5.100.11(vue@3.5.29(typescript@6.0.3))
@@ -23,7 +23,7 @@ importers:
     devDependencies:
       '@appcited/james-typescript':
         specifier: workspace:*
-        version: link:../../packages/typescript
+        version: link:../../libs/typescript
       '@iconify/vue':
         specifier: ^5.0.1
         version: 5.0.1(vue@3.5.29(typescript@6.0.3))
