@@ -13,6 +13,7 @@ const currentRouteName = computed(() =>
 )
 
 const openView = async (routeName?: RouteRecordNameGeneric): Promise<void> => {
+    if (routeName === route.name) return
     await router.push({ name: routeName })
 }
 </script>
