@@ -11,6 +11,7 @@
   },
   "scripts": {
     "init": "pnpm install --frozen-lockfile",
-    "clean": "git clean -dfX"
+    "clean": "git clean -dfX",
+    "auth": "./scripts/auth/github.sh"
   }
 }

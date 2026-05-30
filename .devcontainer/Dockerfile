@@ -68,6 +68,13 @@ ENV TURBO_VERSION=2.9.16
 ENV TURBO_GLOBAL_WARNING_DISABLED=true
 RUN npm install -g turbo@${TURBO_VERSION}
 
+# github cli
+# renovate: source=github-tags name=cli/cli versioning=semver
+ENV GH_VERSION=2.93.0
+RUN ARCH=$(dpkg --print-architecture) && \
+    curl -fsSL https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_${ARCH}.deb -o /tmp/gh.deb && \
+    apt-get install /tmp/gh.deb
+
 # cleanup
 RUN apt-get autoremove -y && \
     apt-get clean -y && \

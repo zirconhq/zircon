@@ -41,6 +41,8 @@ jobs:
           imageName: ghcr.io/zirconhq/zircon/devcontainer
           cacheFrom: ghcr.io/zirconhq/zircon/devcontainer
           push: always
+          env: |
+            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           runCmd: turbo publish
       - uses: actions/cache/save@v4
         with:

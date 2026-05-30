@@ -3,6 +3,7 @@
   "tasks": {
     "//#clean": {},
     "//#init": {},
+    "//#auth": {},
     "init": {
       "dependsOn": ["//#init", "^init"],
       "inputs": ["package.json", "pnpm-lock.yaml", ".npmrc"],
@@ -27,7 +28,7 @@
       "inputs": []
     },
     "publish": {
-      "dependsOn": ["ci"],
+      "dependsOn": ["//#auth", "ci"],
       "cache": false
     },
     "dev": {
