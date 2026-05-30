@@ -12,8 +12,8 @@
     "init": "pnpm install --frozen-lockfile",
     "dev": "{ trap 'kill 0' EXIT; vite build --watch & node --inspect=9229 --watch dist/main.js; }",
     "build": "vite build && node src/scripts/generate-openapi.ts",
-    "pack": "docker build -t ghcr.io/zirconhq/zircon/node:latest . && docker image save --output ./image.tar ghcr.io/zirconhq/zircon/node:latest",
-    "publish": "docker image load --input ./image.tar && docker push ghcr.io/zirconhq/zircon/node:latest",
+    "pack": "docker build -t ghcr.io/zirconhq/zircon:latest . && docker image save --output ./image.tar ghcr.io/zirconhq/zircon:latest",
+    "publish": "docker image load --input ./image.tar && docker push ghcr.io/zirconhq/zircon:latest",
     "check": "tsc --build --noEmit"
   },
   "dependencies": {
