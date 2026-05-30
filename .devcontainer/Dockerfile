@@ -27,6 +27,7 @@ RUN apt-get install -y --no-install-recommends \
     lsb-release \
     curl \
     xz-utils \
+    procps \
     git \
     git-lfs \
     jq

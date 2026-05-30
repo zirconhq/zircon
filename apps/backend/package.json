@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "init": "pnpm install --frozen-lockfile",
-    "dev": "node --inspect-port=0 --inspect --watch --watch-preserve-output src/main.ts",
+    "dev": "node --inspect=9229 --watch --watch-preserve-output src/main.ts",
     "build": "tsc --build tsconfig.app.json && node src/scripts/generate-openapi.ts",
     "check": "tsc --build --noEmit"
   },
