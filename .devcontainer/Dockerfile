@@ -32,6 +32,23 @@ RUN apt-get install -y --no-install-recommends \
     git-lfs \
     jq
 
+# docker
+# renovate: source=github-tags name=docker/cli versioning=semver
+ENV DOCKER_VERSION=28.4.0
+# renovate: source=github-tags name=docker/buildx versioning=semver
+ENV DOCKER_BUILDX_VERSION=0.26.1
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+    echo "deb https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        docker-ce="5:${DOCKER_VERSION}"* \
+        docker-ce-cli="5:${DOCKER_VERSION}"* \
+        docker-buildx-plugin="${DOCKER_BUILDX_VERSION}"*
+# workaround for using docker.socket as non-root user in github codespaces (uses docker group id 800)
+# https://github.com/microsoft/vscode-dev-containers/tree/main/containers/docker-from-docker#enabling-non-root-access-to-docker-in-the-container
+RUN groupmod -g 800 docker && \
+    usermod -aG docker ${NON_ROOT_USER}
+
 # nodejs
 # renovate: source=github-tags name=nodejs/node versioning=semver
 ENV NODE_VERSION=26.2.0

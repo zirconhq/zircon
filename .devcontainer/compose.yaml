@@ -17,3 +17,6 @@ services:
       - type: bind
         source: ${JAMES_NOTES_PATH:-../docs}
         target: /notes
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
