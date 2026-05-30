@@ -7,6 +7,8 @@ services:
     # https://code.visualstudio.com/docs/remote/create-dev-container#_extend-your-docker-compose-file-for-development
     entrypoint: ["bash", "-c", "while sleep 1000; do :; done"]
     user: dev
+    group_add:
+      - "${DOCKER_SOCKET_GID:-800}"
     volumes:
       - type: bind
         source: ..

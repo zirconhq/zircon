@@ -20,6 +20,9 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
+      - name: Detect Docker socket group
+        id: docker-socket
+        run: echo "gid=$(stat -c '%g' /var/run/docker.sock)" >> "$GITHUB_OUTPUT"
       - uses: actions/cache/restore@v4
         with:
           path: |
@@ -32,6 +35,8 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: devcontainers/ci@v0.3
+        env:
+          DOCKER_SOCKET_GID: ${{ steps.docker-socket.outputs.gid }}
         with:
           imageName: ghcr.io/zirconhq/zircon/devcontainer
           cacheFrom: ghcr.io/zirconhq/zircon/devcontainer
