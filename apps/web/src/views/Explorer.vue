@@ -67,8 +67,8 @@ const openResource = async (resource: Resource): Promise<void> => {
 </script>
 
 <template>
-  <Grid class="h-full">
-      <aside class="w-72 border-r border-gray-300 p-4">
+  <Grid class="h-full min-h-0 overflow-hidden">
+      <aside class="h-full min-h-0 overflow-y-auto border-r border-gray-300 p-4 w-72">
         <h1 class="mb-3 text-sm font-semibold text-gray-950">Resources</h1>
         <AsyncContent
           :data="resourcesQuery.data.value"
@@ -90,7 +90,7 @@ const openResource = async (resource: Resource): Promise<void> => {
             </template>
         </AsyncContent>
       </aside>
-      <main class="min-w-0 p-6">
+      <main class="min-w-0 h-full min-h-0 overflow-y-auto p-6">
         <template v-if="selectedResource === null">
           <p class="text-sm text-gray-500">Select a resource to view its content</p>
         </template>
