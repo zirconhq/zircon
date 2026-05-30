@@ -5,6 +5,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   clearScreen: false,
   build: {
+    emptyOutDir: false,
     target: 'esnext',
     outDir: 'dist',
     lib: {
