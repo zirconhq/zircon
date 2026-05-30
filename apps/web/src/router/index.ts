@@ -10,6 +10,7 @@ export const viewRoutes: RouteRecordRaw[] = [
     name: 'explorer',
     meta: {
       name: 'Explorer',
+      icon: 'lucide:file',
     },
     component: () => import('#/src/views/Explorer.vue'),
     props: (route) => ({
