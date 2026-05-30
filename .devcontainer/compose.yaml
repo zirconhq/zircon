@@ -1,0 +1,19 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # overrides default command to avoid a shutdown of container before vscode established a connection
+    # https://code.visualstudio.com/docs/remote/create-dev-container#_extend-your-docker-compose-file-for-development
+    entrypoint: ["bash", "-c", "while sleep 1000; do :; done"]
+    user: dev
+    volumes:
+      - type: bind
+        source: ..
+        target: /workspaces/james
+      - type: bind
+        source: ../.james
+        target: /home/dev/.james
+      - type: bind
+        source: ${JAMES_NOTES_PATH:-../docs}
+        target: /notes

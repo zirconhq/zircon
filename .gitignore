@@ -1,12 +1,10 @@
-# james
-.james/
-
 # dependencies
 node_modules/
 .pnpm-store/
 
 # local
 *.local
+*.env
 
 # typescript
 *.tsbuildinfo

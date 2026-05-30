@@ -1,0 +1,15 @@
+{
+    "plugins": [
+        {
+            "name": "@james/plugin-file",
+            "options": {
+                "resources": [
+                    {
+                        "name": "notes",
+                        "directoryPath": "/notes"
+                    }
+                ]
+            }
+        }
+    ]
+}
