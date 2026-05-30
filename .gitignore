@@ -1,3 +1,6 @@
+# james
+.james/
+
 # dependencies
 node_modules/
 .pnpm-store/
