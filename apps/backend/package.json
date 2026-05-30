@@ -13,10 +13,12 @@
     "init": "pnpm install --frozen-lockfile",
     "dev": "node --inspect=9229 --watch --watch-preserve-output src/main.ts",
     "build": "tsc --build tsconfig.app.json && node src/scripts/generate-openapi.ts",
+    "pack": "docker build -t james-backend .",
     "check": "tsc --build --noEmit"
   },
   "dependencies": {
     "@appcited/james-core": "workspace:*",
+    "@appcited/james-web": "workspace:*",
     "@hono/node-server": "^1.19.6",
     "@hono/zod-openapi": "^1.1.5",
     "hono": "^4.11.1",

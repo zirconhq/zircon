@@ -4,7 +4,7 @@
     "//#clean": {},
     "//#init": {},
     "ci": {
-      "dependsOn": ["check", "build"],
+      "dependsOn": ["check", "build", "pack"],
       "inputs": []
     },
     "init": {
@@ -18,6 +18,9 @@
     "build": {
       "dependsOn": ["init", "^build"],
       "outputs": ["dist/**"]
+    },
+    "pack": {
+      "dependsOn": ["build"]
     },
     "test": {
       "dependsOn": ["init", "^build"]
