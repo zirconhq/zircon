@@ -3,8 +3,10 @@ import { join, relative, resolve, sep } from 'node:path'
 
 import type { Resource, ResourceProvider } from '@appcited/james-core'
 
-const buildResourceUri = (providerName: string, path: string): string =>
-  `/resources/${providerName}/${path}`
+const hasHiddenPathSegment = (path: string): boolean =>
+  path
+    .split('/')
+    .some((segment) => segment.startsWith('.'))
 
 export class FileProvider implements ResourceProvider {
   readonly name: string
@@ -27,21 +29,25 @@ export class FileProvider implements ResourceProvider {
   }
 
   private async recursiveFiles(directoryPath: string): Promise<Resource[]> {
-    const entries = await readdir(directoryPath, {
+    const directoryEntries = await readdir(directoryPath, {
       recursive: true,
       withFileTypes: true,
-    });
+    })
+    
+    const entries = directoryEntries.map((entry) => ({
+      name: entry.name,
+      path: relative(this.directoryPath, join(entry.parentPath, entry.name)).split(sep).join('/'),
+      parentPath: entry.parentPath,
+      type: entry.isFile() ? 'file' : entry.isDirectory() ? 'directory' : 'unknown',
+    }))
 
     return entries
-      .filter((entry) => entry.isFile())
-      .map((entry) => {
-        const path = relative(this.directoryPath, join(entry.parentPath, entry.name)).split(sep).join('/')
-        return {
-          name: entry.name,
-          path,
-          providerName: this.name,
-          uri: buildResourceUri(this.name, path),
-        }
-      })
-    };
+      .filter((entry) => !hasHiddenPathSegment(entry.path))
+      .map((entry) => ({
+        name: entry.name,
+        path: entry.path,
+        providerName: this.name,
+        uri: `/resources/${this.name}/${entry.path}`,
+      }))
+  }
 }
