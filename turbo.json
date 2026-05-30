@@ -3,10 +3,6 @@
   "tasks": {
     "//#clean": {},
     "//#init": {},
-    "ci": {
-      "dependsOn": ["check", "build", "pack"],
-      "inputs": []
-    },
     "init": {
       "dependsOn": ["//#init", "^init"],
       "inputs": ["package.json", "pnpm-lock.yaml", ".npmrc"],
@@ -15,15 +11,24 @@
     "check": {
       "dependsOn": ["init", "^build"]
     },
+    "test": {
+      "dependsOn": ["init", "^build"]
+    },
     "build": {
       "dependsOn": ["init", "^build"],
       "outputs": ["dist/**"]
     },
     "pack": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build", "^pack"],
+      "outputs": ["image.tar"]
     },
-    "test": {
-      "dependsOn": ["init", "^build"]
+    "ci": {
+      "dependsOn": ["check", "test", "build", "pack"],
+      "inputs": []
+    },
+    "publish": {
+      "dependsOn": ["ci"],
+      "cache": false
     },
     "dev": {
       "dependsOn": ["init", "^build"],

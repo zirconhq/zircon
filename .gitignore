@@ -12,6 +12,9 @@ node_modules/
 # build
 dist/
 
+# pack
+*.tar
+
 # generated
 generated/
 *.generated.*
