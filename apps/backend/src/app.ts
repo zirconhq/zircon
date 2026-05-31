@@ -12,12 +12,13 @@ import { createResourcesHandler, resourcesRoute } from '#/src/routes/resources/l
 export const createApp = () => {
 	const app = new OpenAPIHono()
 
-	const api = app.basePath('/api')
-	api.openapi(healthRoute, healthHandler)
-	api.openapi(resourcesRoute, createResourcesHandler())
-	api.openapi(resourceContentRoute, createResourceContentHandler())
-	api.openapi(writeResourceContentRoute, createWriteResourceContentHandler())
-	
+	const api = new OpenAPIHono()
+		.openapi(healthRoute, healthHandler)
+		.openapi(resourcesRoute, createResourcesHandler())
+		.openapi(resourceContentRoute, createResourceContentHandler())
+		.openapi(writeResourceContentRoute, createWriteResourceContentHandler())
+	app.route('/api', api)
+
 	const currentDirectory = dirname(fileURLToPath(import.meta.url))
 	const webRoot = resolve(currentDirectory, '../dist/web')
 	app.use('/assets/*', serveStatic({ root: webRoot }))
