@@ -12,6 +12,9 @@ const ResourceSchema = z
     path: z.string().openapi({
       example: 'notes/meeting-notes.md',
     }),
+    contentType: z.string().openapi({
+      example: 'text/markdown; charset=utf-8',
+    }),
     uri: z.string().openapi({
       example: 'zircon://resources/docs/notes/meeting-notes.md',
     }),

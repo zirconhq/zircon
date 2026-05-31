@@ -10,34 +10,37 @@ const ResourceContentParamsSchema = z
       example: 'Development.md',
     }),
   })
-  .openapi('ResourceContentParams')
+  .openapi('WriteResourceContentParams')
 
-const ResourceContentResponseSchema = z.string().openapi({
+const ResourceContentRequestSchema = z.string().openapi({
   example: '# Development',
 })
 
 const ResourceContentErrorResponseSchema = z
   .object({
     message: z.string().openapi({
-      example: 'Resource not found',
+      example: 'Resource could not be written',
     }),
   })
-  .openapi('ResourceContentErrorResponse')
+  .openapi('WriteResourceContentErrorResponse')
 
-export const resourceContentRoute = createRoute({
-  method: 'get',
+export const writeResourceContentRoute = createRoute({
+  method: 'put',
   path: '/resources/{providerName}/{resourcePath}{.+}',
   request: {
     params: ResourceContentParamsSchema,
-  },
-  responses: {
-    200: {
+    body: {
       content: {
         'text/plain': {
-          schema: ResourceContentResponseSchema,
+          schema: ResourceContentRequestSchema,
         },
       },
-      description: 'Resource content',
+      required: true,
+    },
+  },
+  responses: {
+    204: {
+      description: 'Resource content written',
     },
     404: {
       content: {
@@ -53,12 +56,12 @@ export const resourceContentRoute = createRoute({
           schema: ResourceContentErrorResponseSchema,
         },
       },
-      description: 'Resource content could not be read',
+      description: 'Resource content could not be written',
     },
   },
 })
 
-export const createResourceContentHandler = (): RouteHandler<typeof resourceContentRoute> => async (c) => {
+export const createWriteResourceContentHandler = (): RouteHandler<typeof writeResourceContentRoute> => async (c) => {
   const { providerName, resourcePath } = c.req.valid('param')
   const resourceProvider = resourceProviders.find(provider => provider.name === providerName)
 
@@ -67,14 +70,14 @@ export const createResourceContentHandler = (): RouteHandler<typeof resourceCont
   }
 
   try {
-    const content = await resourceProvider.read(resourcePath)
-
-    if (content === null) {
+    if (await resourceProvider.read(resourcePath) === null) {
       return c.json({ message: 'Resource not found' }, 404)
     }
 
-    return c.text(content, 200)
+    await resourceProvider.write(resourcePath, await c.req.text())
+
+    return c.body(null, 204)
   } catch {
-    return c.json({ message: 'Resource content could not be read' }, 500)
+    return c.json({ message: 'Resource content could not be written' }, 500)
   }
 }

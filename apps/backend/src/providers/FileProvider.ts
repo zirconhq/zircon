@@ -1,5 +1,6 @@
-import { readdir, readFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
+import mime from 'mime'
 
 import type { Resource, ResourceProvider } from '@zircon/core'
 
@@ -7,6 +8,8 @@ const hasHiddenPathSegment = (path: string): boolean =>
   path
     .split('/')
     .some((segment) => segment.startsWith('.'))
+
+const fallbackContentType = 'application/octet-stream'
 
 export class FileProvider implements ResourceProvider {
   readonly name: string
@@ -18,9 +21,23 @@ export class FileProvider implements ResourceProvider {
     this.directoryPath = directoryPath
   }
 
-  async content(resourcePath: string): Promise<string | null> {
-    const absolutePath = resolve(this.directoryPath, resourcePath)
-    return await readFile(absolutePath, 'utf8')
+  async read(resourcePath: string): Promise<string | null> {
+    const absolutePath = this.absoluteResourcePath(resourcePath)
+
+    try {
+      return await readFile(absolutePath, 'utf8')
+    } catch (error) {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') {
+        return null
+      }
+
+      throw error
+    }
+  }
+
+  async write(resourcePath: string, content: string): Promise<void> {
+    const absolutePath = this.absoluteResourcePath(resourcePath)
+    await writeFile(absolutePath, content, 'utf8')
   }
 
   async list(): Promise<Resource[]> {
@@ -44,10 +61,22 @@ export class FileProvider implements ResourceProvider {
     return entries
       .filter((entry) => !hasHiddenPathSegment(entry.path))
       .map((entry) => ({
+        contentType: mime.getType(entry.path) ?? fallbackContentType,
         name: entry.name,
         path: entry.path,
         providerName: this.name,
         uri: `/resources/${this.name}/${entry.path}`,
       }))
+  }
+
+  private absoluteResourcePath(resourcePath: string): string {
+    const absolutePath = resolve(this.directoryPath, resourcePath)
+    const relativePath = relative(this.directoryPath, absolutePath)
+
+    if (relativePath === '' || relativePath === '..' || relativePath.startsWith(`..${sep}`)) {
+      throw new Error('Resource path is outside the provider directory')
+    }
+
+    return absolutePath
   }
 }

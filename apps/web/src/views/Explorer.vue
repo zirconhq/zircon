@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { useQuery } from '@tanstack/vue-query'
 import type { Resource } from '@zircon/core'
+import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { onBeforeRouteUpdate, useRouter } from 'vue-router'
 
 import AsyncContent from '#/src/components/AsyncContent.vue'
 import Grid from '#/src/components/Grid.vue'
-import TextRenderer from '#/src/components/TextRenderer.vue'
+import MarkdownViewer from '#/src/components/MarkdownViewer.vue'
+import TextViewer from '#/src/components/TextViewer.vue'
+import { useResourceContent } from '#/src/composables/useResourceContent.js'
 
 const props = defineProps<{
   resourceUri?: string
@@ -37,23 +40,21 @@ const resourcesQuery = useQuery({
   },
 })
 
-const resourceContentQuery = useQuery({
-  queryKey: ['resource-content', selectedResourceUri],
-  queryFn: async () => {
-    if (selectedResource.value == null) {
-      throw new Error('Selected resource could not be found')
-    }
+const {
+  content,
+  hasChanges,
+  discardChanges,
+  data: loadedContent,
+  error: loadError,
+  isLoading,
+  isSavePending,
+  isMarkdownResource,
+  saveErrorMessage,
+  saveResourceContent,
+} = useResourceContent(selectedResource)
 
-    const response = await fetch(`/api${selectedResource.value.uri}`)
-
-    if (!response.ok) {
-      throw new Error('Resource content could not be loaded')
-    }
-
-    return await response.text()
-  },
-  enabled: computed(() => selectedResource.value != null),
-  retry: false,
+onBeforeRouteUpdate(() => {
+  discardChanges()
 })
 
 const router = useRouter()
@@ -96,18 +97,35 @@ const openResource = async (resource: Resource): Promise<void> => {
           <p class="text-sm text-gray-500">Select a resource to view its content</p>
         </template>
         <template v-else>
-          <header class="mb-4 border-b border-gray-200 pb-3">
-            <h2 class="text-lg font-semibold text-gray-950">{{ selectedResource?.name }}</h2>
-            <p class="text-sm text-gray-500">{{ selectedResource?.uri }}</p>
+          <header class="mb-4 flex items-start justify-between gap-4 border-b border-gray-200 pb-3">
+            <div class="min-w-0">
+              <h2 class="truncate text-lg font-semibold text-gray-950">{{ selectedResource?.name }}</h2>
+              <p class="truncate text-sm text-gray-500">{{ selectedResource?.uri }}</p>
+            </div>
+            <button
+              class="inline-flex shrink-0 items-center gap-2 rounded border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+              :disabled="!hasChanges || isSavePending"
+              type="button"
+              @click="saveResourceContent"
+            >
+              <Icon icon="lucide:save" class="h-4 w-4" />
+              {{ isSavePending ? 'Saving...' : 'Save' }}
+            </button>
           </header>
+          <p v-if="saveErrorMessage" class="mb-3 text-sm text-red-600">
+            {{ saveErrorMessage }}
+          </p>
           <AsyncContent
-            :data="resourceContentQuery.data.value"
-            :error="resourceContentQuery.error.value"
-            :is-loading="resourceContentQuery.isPending.value"
+            :data="loadedContent"
+            :error="loadError"
+            :is-loading="isLoading"
           >
-            <template #default="{ data }">
-              <TextRenderer :content="data" />
-            </template>
+            <MarkdownViewer
+              v-if="isMarkdownResource"
+              :content
+              @update:content="content = $event"
+            />
+            <TextViewer v-else :content />
           </AsyncContent>
         </template>
       </main>

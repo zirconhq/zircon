@@ -6,6 +6,7 @@ import { OpenAPIHono } from '@hono/zod-openapi'
 
 import { healthHandler, healthRoute } from '#/src/routes/health.ts'
 import { createResourceContentHandler, resourceContentRoute } from '#/src/routes/resources/content/get.ts'
+import { createWriteResourceContentHandler, writeResourceContentRoute } from '#/src/routes/resources/content/put.ts'
 import { createResourcesHandler, resourcesRoute } from '#/src/routes/resources/list.ts'
 
 export const createApp = () => {
@@ -15,6 +16,7 @@ export const createApp = () => {
 	api.openapi(healthRoute, healthHandler)
 	api.openapi(resourcesRoute, createResourcesHandler())
 	api.openapi(resourceContentRoute, createResourceContentHandler())
+	api.openapi(writeResourceContentRoute, createWriteResourceContentHandler())
 	
 	const currentDirectory = dirname(fileURLToPath(import.meta.url))
 	const webRoot = resolve(currentDirectory, '../dist/web')

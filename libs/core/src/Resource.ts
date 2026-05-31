@@ -3,4 +3,5 @@ export type Resource = {
   name: string
   providerName: string
   path: string
+  contentType: string
 }

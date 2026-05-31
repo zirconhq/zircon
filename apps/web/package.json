@@ -17,17 +17,19 @@
     "check": "vue-tsc --build --noEmit"
   },
   "dependencies": {
-    "@zircon/core": "workspace:*",
+    "@codemirror/lang-markdown": "^6.5.0",
     "@tanstack/vue-query": "^5.100.11",
+    "@zircon/core": "workspace:*",
+    "codemirror": "^6.0.2",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@zircon/typescript": "workspace:*",
     "@iconify/vue": "^5.0.1",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^25.9.1",
     "@vitejs/plugin-vue": "^6.0.7",
+    "@zircon/typescript": "workspace:*",
     "tailwindcss": "4.3.0",
     "typescript": "~6.0.3",
     "vite": "^8.0.13",
