@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
 
-import type { Resource, ResourceProvider } from '@appcited/james-core'
+import type { Resource, ResourceProvider } from '@zircon/core'
 
 const hasHiddenPathSegment = (path: string): boolean =>
   path

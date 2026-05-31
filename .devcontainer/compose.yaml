@@ -12,12 +12,12 @@ services:
     volumes:
       - type: bind
         source: ..
-        target: /workspaces/james
+        target: /workspaces/zircon
       - type: bind
-        source: ../.james
-        target: /home/dev/.james
+        source: ../.zircon
+        target: /home/dev/.zircon
       - type: bind
-        source: ${JAMES_NOTES_PATH:-../docs}
+        source: ${ZIRCON_NOTES_PATH:-../docs}
         target: /notes
       - type: bind
         source: /var/run/docker.sock

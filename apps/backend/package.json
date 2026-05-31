@@ -1,5 +1,5 @@
 {
-  "name": "@appcited/james-node",
+  "name": "@zircon/backend",
   "version": "0.1.0",
   "type": "module",
   "imports": {
@@ -11,21 +11,21 @@
   "scripts": {
     "init": "pnpm install --frozen-lockfile",
     "dev": "{ trap 'kill 0' EXIT; vite build --watch & node --inspect=9229 --watch dist/main.js; }",
-    "build": "vite build && mkdir -p dist/web && cp -r node_modules/@appcited/james-web/dist/. dist/web/ && node src/scripts/generate-openapi.ts",
+    "build": "vite build && mkdir -p dist/web && cp -r node_modules/@zircon/web/dist/. dist/web/ && node src/scripts/generate-openapi.ts",
     "pack": "docker build -t ghcr.io/zirconhq/zircon:latest . && docker image save --output ./image.tar ghcr.io/zirconhq/zircon:latest",
     "publish": "docker image load --input ./image.tar && docker push ghcr.io/zirconhq/zircon:latest",
     "check": "tsc --build --noEmit"
   },
   "dependencies": {
-    "@appcited/james-core": "workspace:*",
-    "@appcited/james-web": "workspace:*",
+    "@zircon/core": "workspace:*",
+    "@zircon/web": "workspace:*",
     "@hono/node-server": "^1.19.6",
     "@hono/zod-openapi": "^1.1.5",
     "hono": "^4.11.1",
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@appcited/james-typescript": "workspace:*",
+    "@zircon/typescript": "workspace:*",
     "@types/node": "^25.9.1",
     "typescript": "~6.0.3",
     "vite": "^8.0.13"

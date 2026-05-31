@@ -1,5 +1,5 @@
 {
-  "extends": "@appcited/james-typescript/tsconfig.web.json",
+  "extends": "@zircon/typescript/tsconfig.web.json",
   "include": ["src/**/*", "src/**/*.json", "src/**/*.vue"],
   "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"],
   "compilerOptions": {

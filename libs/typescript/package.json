@@ -1,5 +1,5 @@
 {
-  "name": "@appcited/james-typescript",
+  "name": "@zircon/typescript",
   "type": "module",
   "files": [
     "dist"

@@ -8,18 +8,18 @@ importers:
 
   .:
     dependencies:
-      '@appcited/james-core':
-        specifier: workspace:*
-        version: link:../../libs/core
-      '@appcited/james-web':
-        specifier: workspace:*
-        version: link:../web
       '@hono/node-server':
         specifier: ^1.19.6
         version: 1.19.14(hono@4.12.21)
       '@hono/zod-openapi':
         specifier: ^1.1.5
         version: 1.4.0(hono@4.12.21)(zod@4.4.3)
+      '@zircon/core':
+        specifier: workspace:*
+        version: link:../../libs/core
+      '@zircon/web':
+        specifier: workspace:*
+        version: link:../web
       hono:
         specifier: ^4.11.1
         version: 4.12.21
@@ -27,12 +27,12 @@ importers:
         specifier: ^4.1.12
         version: 4.4.3
     devDependencies:
-      '@appcited/james-typescript':
-        specifier: workspace:*
-        version: link:../../libs/typescript
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      '@zircon/typescript':
+        specifier: workspace:*
+        version: link:../../libs/typescript
       typescript:
         specifier: ~6.0.3
         version: 6.0.3

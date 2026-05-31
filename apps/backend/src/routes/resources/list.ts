@@ -13,7 +13,7 @@ const ResourceSchema = z
       example: 'notes/meeting-notes.md',
     }),
     uri: z.string().openapi({
-      example: 'james://resources/docs/notes/meeting-notes.md',
+      example: 'zircon://resources/docs/notes/meeting-notes.md',
     }),
   })
   .openapi('Resource')

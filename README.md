@@ -1,3 +1,3 @@
-# James
+# Zircon
 
-James is a personal assistant app.
+Zircon is a personal assistant app.

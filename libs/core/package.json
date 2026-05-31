@@ -1,5 +1,5 @@
 {
-  "name": "@appcited/james-core",
+  "name": "@zircon/core",
   "type": "module",
   "files": [
     "dist"
@@ -19,7 +19,7 @@
     "check": "tsc --build --noEmit"
   },
   "devDependencies": {
-    "@appcited/james-typescript": "workspace:*",
+    "@zircon/typescript": "workspace:*",
     "@types/node": "^25.9.1",
     "typescript": "~6.0.3",
     "vite": "^8.0.13"

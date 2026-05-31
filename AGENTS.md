@@ -1,4 +1,4 @@
-James is a personal assistant app.
+Zircon is a personal assistant app.
 
 ## General
 - After each message, check if there are decissions which are worth adding to AGENTS.md and suggest them to the user.

@@ -1,5 +1,5 @@
 {
-  "extends": "@appcited/james-typescript/tsconfig.base.json",
+  "extends": "@zircon/typescript/tsconfig.base.json",
   "include": ["src/**/*"],
   "compilerOptions": {
     "rootDir": "./src"

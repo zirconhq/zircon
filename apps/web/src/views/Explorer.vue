@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useQuery } from '@tanstack/vue-query'
-import type { Resource } from '@appcited/james-core'
+import type { Resource } from '@zircon/core'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 

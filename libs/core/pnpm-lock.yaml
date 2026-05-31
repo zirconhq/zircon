@@ -8,12 +8,12 @@ importers:
 
   .:
     devDependencies:
-      '@appcited/james-typescript':
-        specifier: workspace:*
-        version: link:../typescript
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      '@zircon/typescript':
+        specifier: workspace:*
+        version: link:../typescript
       typescript:
         specifier: ~6.0.3
         version: 6.0.3

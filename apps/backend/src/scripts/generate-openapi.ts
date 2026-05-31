@@ -10,7 +10,7 @@ const app = createApp()
 const document = app.getOpenAPI31Document({
   openapi: '3.1.0',
   info: {
-    title: 'James Backend API',
+    title: 'Zircon Backend API',
     version: packageJson.version,
   },
 })

@@ -1,7 +1,7 @@
 {
     "plugins": [
         {
-            "name": "@james/plugin-file",
+            "name": "@zircon/plugin-file",
             "options": {
                 "resources": [
                     {

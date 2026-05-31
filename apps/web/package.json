@@ -1,5 +1,5 @@
 {
-  "name": "@appcited/james-web",
+  "name": "@zircon/web",
   "version": "0.1.0",
   "type": "module",
   "imports": {
@@ -17,13 +17,13 @@
     "check": "vue-tsc --build --noEmit"
   },
   "dependencies": {
-    "@appcited/james-core": "workspace:*",
+    "@zircon/core": "workspace:*",
     "@tanstack/vue-query": "^5.100.11",
     "vue": "^3.5.29",
     "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@appcited/james-typescript": "workspace:*",
+    "@zircon/typescript": "workspace:*",
     "@iconify/vue": "^5.0.1",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^25.9.1",

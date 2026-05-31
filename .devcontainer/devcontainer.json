@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
   "service": "devcontainer",
   "dockerComposeFile": "compose.yaml",
-  "workspaceFolder": "/workspaces/james",
+  "workspaceFolder": "/workspaces/zircon",
   "containerEnv": {
     "CONTAINER_WORKSPACE_VOLUME": "${containerWorkspaceFolder}",
     "LOCAL_WORKSPACE_VOLUME": "${localWorkspaceFolder}"
