@@ -10,11 +10,12 @@
   ],
   "scripts": {
     "init": "pnpm install --frozen-lockfile",
-    "dev": "{ trap 'kill 0' EXIT; vite build --watch & node --inspect=9229 --watch dist/main.js; }",
+    "dev": "{ trap 'kill 0' EXIT; vite build --watch & node --inspect=9229 --watch --watch-preserve-output dist/main.js; }",
     "build": "vite build && mkdir -p dist/web && cp -r node_modules/@zircon/web/dist/. dist/web/ && node src/scripts/generate-openapi.ts",
     "pack": "docker build -t ghcr.io/zirconhq/zircon:latest . && docker image save --output ./image.tar ghcr.io/zirconhq/zircon:latest",
     "publish": "docker image load --input ./image.tar && docker push ghcr.io/zirconhq/zircon:latest",
-    "check": "tsc --build --noEmit"
+    "check": "tsc --build --noEmit",
+    "mock": "./scripts/mock.sh"
   },
   "dependencies": {
     "@zircon/core": "workspace:*",
