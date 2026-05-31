@@ -6,9 +6,18 @@ const app = createApp()
 
 const port = 3000
 
-serve({
+const server = serve({
   fetch: app.fetch,
   port,
 })
+
+const shutdown = (): void => {
+  server.close(() => {
+    process.exit(0)
+  })
+}
+
+process.once('SIGINT', shutdown)
+process.once('SIGTERM', shutdown)
 
 console.log(`Backend listening on http://localhost:${port}`)
