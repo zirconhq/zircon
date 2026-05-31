@@ -10,6 +10,7 @@ import TextRenderer from '#/src/components/TextRenderer.vue'
 
 const props = defineProps<{
   resourceUri?: string
+  isSidebarOpen?: boolean
 }>()
 
 const selectedResourceUri = computed(() => props.resourceUri ?? null)
@@ -68,7 +69,7 @@ const openResource = async (resource: Resource): Promise<void> => {
 
 <template>
   <Grid class="h-full min-h-0 overflow-hidden">
-      <aside class="h-full min-h-0 overflow-y-auto border-r border-gray-300 p-4 w-72">
+      <aside v-if="props.isSidebarOpen !== false" class="h-full min-h-0 overflow-y-auto border-r border-gray-300 p-4 w-72">
         <h1 class="mb-3 text-sm font-semibold text-gray-950">Resources</h1>
         <AsyncContent
           :data="resourcesQuery.data.value"
