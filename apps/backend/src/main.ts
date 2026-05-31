@@ -11,7 +11,8 @@ const server = serve({
   port,
 })
 
-const shutdown = (): void => {
+const shutdown = () => {
+  console.log('Shutting down server gracefully...')
   server.close(() => {
     process.exit(0)
   })
