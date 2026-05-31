@@ -69,7 +69,7 @@ const openResource = async (resource: Resource): Promise<void> => {
 </script>
 
 <template>
-  <Grid class="h-full min-h-0 overflow-hidden">
+  <Grid class="h-full min-h-0 overflow-hidden grid-cols-[auto_1fr]">
       <aside v-if="props.isSidebarOpen !== false" class="h-full min-h-0 overflow-y-auto border-r border-gray-300 p-4 w-72">
         <h1 class="mb-3 text-sm font-semibold text-gray-950">Resources</h1>
         <AsyncContent

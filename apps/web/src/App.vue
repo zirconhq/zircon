@@ -32,7 +32,7 @@ const openView = async (routeName?: RouteRecordNameGeneric): Promise<void> => {
     <div class="flex h-dvh">
         <ViewBar :available-routes="viewRoutes" :current-route-name="currentRouteName" @select="openView"
             class="h-full w-14 shrink-0 border-r border-gray-300" />
-        <div>
+        <div class="flex-1">
             <RouterView v-slot="{ Component }">
                 <component
                     :is="Component"
