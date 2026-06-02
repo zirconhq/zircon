@@ -1,7 +1,7 @@
 {
-  "plugins": [
-    {
-      "name": "@zircon/plugin-file-system",
+  "plugins": {
+    "@zircon/plugin-file-system": {
+      "enabled": true,
       "options": {
         "resources": [
           {
@@ -11,5 +11,5 @@
         ]
       }
     }
-  ]
+  }
 }

@@ -21,7 +21,8 @@
   },
   "peerDependencies": {
     "@zircon/core": "workspace:*",
-    "mime": "^4.1.0"
+    "mime": "^4.1.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@zircon/typescript": "workspace:*",

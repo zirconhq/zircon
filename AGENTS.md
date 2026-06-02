@@ -8,3 +8,7 @@ Zircon is a personal assistant app.
 - ALWAYS run `turbo ci --output-logs=errors-only` on root directory after every code change to ensure that init, build, check, lint and tests pass for all projects. 
 - Use already running dev processes instead of starting new ones (when available).
 - Validate changes that could affect the frontend using the browser before finishing the task.
+- Validate changes that could affect the backend using curl before finishing the task.
+
+## Code style
+- Internal libraries and plugins should add external runtime libraries to `peerDependencies`
