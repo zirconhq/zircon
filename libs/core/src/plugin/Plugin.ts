@@ -24,3 +24,5 @@ export const PluginSchema = z.looseObject({
   }),
   setup: z.function(),
 })
+
+export type PluginLoader = (pluginName: string) => Promise<Plugin>

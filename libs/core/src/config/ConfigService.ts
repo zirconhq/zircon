@@ -1,18 +1,5 @@
-import { z } from 'zod'
-
-import type { Plugin } from '../plugin/Plugin.ts'
-
-const PluginConfigSchema = z.object({
-  enabled: z.boolean(),
-  options: z.unknown().optional(),
-})
-
-const ConfigSchema = z.object({
-  plugins: z.record(z.string(), PluginConfigSchema).optional(),
-})
-
-export type Config = z.infer<typeof ConfigSchema>
-export type PluginLoader = (pluginName: string) => Promise<Plugin>
+import type { Plugin, PluginLoader } from '../plugin/Plugin.ts'
+import { ConfigSchema, type Config } from './Config.ts'
 
 const parsePluginOptions = async <TOptions>(
   plugin: Plugin<TOptions>,
