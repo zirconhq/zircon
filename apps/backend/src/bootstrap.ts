@@ -2,13 +2,13 @@ import { readFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { resolve } from 'node:path'
 
-import type { PluginApp, ResourceProvider } from '@zircon/core'
+import { ConfigService, type PluginApp, type ResourceProvider } from '@zircon/core'
 
-import { ConfigService } from '#/src/services/ConfigService.ts'
+import { loadPlugin } from '#/src/services/config/loadPlugin.ts'
 
 const configFilePath = resolve(homedir(), '.zircon/config.json')
 const configFile = JSON.parse(readFileSync(configFilePath, 'utf8'))
-const configService = new ConfigService(configFile)
+const configService = new ConfigService(configFile, loadPlugin)
 
 const config = await configService.readConfig()
 

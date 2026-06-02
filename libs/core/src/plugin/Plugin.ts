@@ -1,7 +1,7 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec'
 import { z } from 'zod'
 
-import type { ResourceProvider } from './ResourceProvider.ts'
+import type { ResourceProvider } from '../resource/ResourceProvider.ts'
 
 export interface PluginApp {
   addResourceProvider(provider: ResourceProvider): void

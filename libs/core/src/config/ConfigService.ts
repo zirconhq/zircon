@@ -1,9 +1,6 @@
 import { z } from 'zod'
 
-import type { Plugin } from '@zircon/core'
-
-import { loadPlugin } from '#/src/services/config/loadPlugin.ts'
-import { parsePluginOptions } from '#/src/services/config/parsePluginOptions.ts'
+import type { Plugin } from '../plugin/Plugin.ts'
 
 const PluginConfigSchema = z.object({
   enabled: z.boolean(),
@@ -15,13 +12,33 @@ const ConfigSchema = z.object({
 })
 
 export type Config = z.infer<typeof ConfigSchema>
+export type PluginLoader = (pluginName: string) => Promise<Plugin>
+
+const parsePluginOptions = async <TOptions>(
+  plugin: Plugin<TOptions>,
+  options: unknown,
+): Promise<TOptions> => {
+  const result = await plugin.optionsSchema['~standard'].validate(options)
+
+  if (result.issues) {
+    const issues = result.issues
+      .map((issue) => `${issue.path}: ${issue.message}`)
+      .join('; ')
+
+    throw new Error(`Invalid options for plugin ${plugin.name}: ${issues}`)
+  }
+
+  return result.value
+}
 
 export class ConfigService {
   private readonly config: unknown
+  private readonly loadPlugin: PluginLoader
   private readonly plugins = new Map<string, Plugin>()
 
-  constructor(config: unknown) {
+  constructor(config: unknown, loadPlugin: PluginLoader) {
     this.config = config
+    this.loadPlugin = loadPlugin
   }
 
   getPlugin(pluginName: string): Plugin {
@@ -38,7 +55,7 @@ export class ConfigService {
     const config = ConfigSchema.parse(this.config)
     const plugins = Object.fromEntries(await Promise.all(
       Object.entries(config.plugins ?? {}).map(async ([pluginName, pluginConfig]) => {
-        const plugin = await loadPlugin(pluginName)
+        const plugin = await this.loadPlugin(pluginName)
         this.plugins.set(pluginName, plugin)
 
         return [pluginName, {
@@ -48,6 +65,9 @@ export class ConfigService {
       }),
     ))
 
-    return config
+    return {
+      ...config,
+      plugins,
+    }
   }
 }
