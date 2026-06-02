@@ -1,0 +1,32 @@
+{
+  "name": "@zircon/plugin-file-system",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "imports": {
+    "#/*": "./*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "init": "pnpm install --frozen-lockfile",
+    "build": "vite build && tsc --build",
+    "check": "tsc --build --noEmit",
+    "dev": "{ trap 'kill 0' EXIT; vite build --watch & tsc --build --watch --preserveWatchOutput; }"
+  },
+  "peerDependencies": {
+    "@zircon/core": "workspace:*",
+    "mime": "^4.1.0"
+  },
+  "devDependencies": {
+    "@zircon/typescript": "workspace:*",
+    "@types/node": "^25.9.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.0.13"
+  }
+}

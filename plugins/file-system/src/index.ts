@@ -4,12 +4,22 @@ import mime from 'mime'
 
 import type { Resource, ResourceProvider } from '@zircon/core'
 
+export type FileSystemResourceConfig = {
+  name: string
+  directoryPath: string
+}
+
 const hasHiddenPathSegment = (path: string): boolean =>
   path
     .split('/')
     .some((segment) => segment.startsWith('.'))
 
 const fallbackContentType = 'application/octet-stream'
+
+export const createFileSystemResourceProviders = (
+  resources: FileSystemResourceConfig[],
+): ResourceProvider[] =>
+  resources.map((resource) => new FileProvider(resource.name, resource.directoryPath))
 
 export class FileProvider implements ResourceProvider {
   readonly name: string
@@ -50,7 +60,7 @@ export class FileProvider implements ResourceProvider {
       recursive: true,
       withFileTypes: true,
     })
-    
+
     const entries = directoryEntries.map((entry) => ({
       name: entry.name,
       path: relative(this.directoryPath, join(entry.parentPath, entry.name)).split(sep).join('/'),

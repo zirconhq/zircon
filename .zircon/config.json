@@ -1,15 +1,15 @@
 {
-    "plugins": [
-        {
-            "name": "@zircon/plugin-file",
-            "options": {
-                "resources": [
-                    {
-                        "name": "notes",
-                        "directoryPath": "/notes"
-                    }
-                ]
-            }
-        }
-    ]
+  "plugins": [
+    {
+      "name": "@zircon/plugin-file-system",
+      "options": {
+        "resources": [
+          {
+            "name": "docs",
+            "directoryPath": "/workspaces/zircon/docs"
+          }
+        ]
+      }
+    }
+  ]
 }

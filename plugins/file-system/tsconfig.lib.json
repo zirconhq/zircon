@@ -1,0 +1,7 @@
+{
+  "extends": "@zircon/typescript/tsconfig.node.json",
+  "include": ["src/**/*"],
+  "compilerOptions": {
+    "rootDir": "./src"
+  }
+}
