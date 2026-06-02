@@ -2,11 +2,15 @@ import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join, relative, resolve, sep } from 'node:path'
 import mime from 'mime'
 
-import type { Resource, ResourceProvider } from '@zircon/core'
+import type { Plugin, Resource, ResourceProvider } from '@zircon/core'
 
 export type FileSystemResourceConfig = {
   name: string
   directoryPath: string
+}
+
+export type FileSystemPluginOptions = {
+  resources?: FileSystemResourceConfig[]
 }
 
 const hasHiddenPathSegment = (path: string): boolean =>
@@ -20,6 +24,16 @@ export const createFileSystemResourceProviders = (
   resources: FileSystemResourceConfig[],
 ): ResourceProvider[] =>
   resources.map((resource) => new FileProvider(resource.name, resource.directoryPath))
+
+export const fileSystemPlugin: Plugin<FileSystemPluginOptions | undefined> = {
+  name: '@zircon/plugin-file-system',
+
+  setup(app, options) {
+    for (const resourceProvider of createFileSystemResourceProviders(options?.resources ?? [])) {
+      app.addResourceProvider(resourceProvider)
+    }
+  },
+}
 
 export class FileProvider implements ResourceProvider {
   readonly name: string
