@@ -4,10 +4,12 @@ import { createApp } from '#/src/app.ts'
 
 const app = createApp()
 
+const hostname = '0.0.0.0'
 const port = 3000
 
 const server = serve({
   fetch: app.fetch,
+  hostname,
   port,
 })
 
@@ -21,4 +23,4 @@ const shutdown = () => {
 process.once('SIGINT', shutdown)
 process.once('SIGTERM', shutdown)
 
-console.log(`Backend listening on http://localhost:${port}`)
+console.log(`Backend listening on http://${hostname}:${port}`)
