@@ -13,9 +13,10 @@ jobs:
         platform:
           - name: amd64
             os: ubuntu-24.04
-          # not yet supported for private repositories
-          # - name: arm64
-          #   os: ubuntu-24.04-arm
+            platform: linux/amd64
+          - name: arm64
+            os: ubuntu-24.04-arm
+            platform: linux/arm64
     runs-on: ${{ matrix.platform.os }}
     timeout-minutes: 30
     steps:
@@ -39,17 +40,39 @@ jobs:
           DOCKER_SOCKET_GID: ${{ steps.docker-socket.outputs.gid }}
         with:
           imageName: ghcr.io/zirconhq/zircon/devcontainer
+          imageTag: latest
+          platform: ${{ matrix.platform.platform }}
+          useNativeRunner: true
           cacheFrom: ghcr.io/zirconhq/zircon/devcontainer
           push: always
           env: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          runCmd: turbo publish
+          runCmd: turbo ci
       - uses: actions/cache/save@v6
         with:
           path: |
             .pnpm-store
             .turbo
           key: cache-${{ matrix.platform.os }}-${{ github.run_id }}
+
+  devcontainer-manifest:
+    needs: main
+    permissions:
+      packages: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish devcontainer manifest
+        run: |
+          docker buildx imagetools create \
+            --tag ghcr.io/zirconhq/zircon/devcontainer:latest \
+            ghcr.io/zirconhq/zircon/devcontainer:latest-linux-amd64 \
+            ghcr.io/zirconhq/zircon/devcontainer:latest-linux-arm64
 
   release-please:
     permissions:
