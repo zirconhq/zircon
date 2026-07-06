@@ -8,7 +8,7 @@ const FileSystemResourceConfigSchema = z.object({
 export type FileSystemResourceConfig = z.infer<typeof FileSystemResourceConfigSchema>
 
 export const FileSystemPluginOptionsSchema = z.object({
-  resources: z.array(FileSystemResourceConfigSchema).optional(),
+  collections: z.array(FileSystemResourceConfigSchema).optional(),
 }).optional()
 
 export type FileSystemPluginOptions = z.infer<typeof FileSystemPluginOptionsSchema>

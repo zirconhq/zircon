@@ -1,0 +1,8 @@
+{
+    "name": "@zircon/runtime",
+    "version": "0.1.0",
+    "dependencies": {
+        "@zircon/backend": "workspace:*",
+        "@zircon/plugin-file-system": "workspace:*"
+    }
+}

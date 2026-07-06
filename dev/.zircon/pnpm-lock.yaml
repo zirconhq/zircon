@@ -1,0 +1,16 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@zircon/backend':
+        specifier: workspace:*
+        version: link:../../apps/backend
+      '@zircon/plugin-file-system':
+        specifier: workspace:*
+        version: link:../../plugins/file-system

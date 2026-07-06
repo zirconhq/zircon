@@ -20,9 +20,6 @@ importers:
       '@zircon/core':
         specifier: workspace:*
         version: link:../../libs/core
-      '@zircon/plugin-file-system':
-        specifier: workspace:*
-        version: link:../../plugins/file-system
       '@zircon/web':
         specifier: workspace:*
         version: link:../web

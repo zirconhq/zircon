@@ -11,4 +11,5 @@ Zircon is a personal assistant app.
 - Validate changes that could affect the backend using curl before finishing the task.
 
 ## Code style
-- Internal libraries and plugins should add external runtime libraries to `peerDependencies`
+- Internal libraries and plugins should add external runtime libraries to `peerDependencies`.
+- Prefer guard clauses: check error and invalid cases first, throw or return early, then keep the valid happy-path result as the final return.

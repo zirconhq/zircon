@@ -3,10 +3,10 @@
     "@zircon/plugin-file-system": {
       "enabled": true,
       "options": {
-        "resources": [
+        "collections": [
           {
             "name": "docs",
-            "directoryPath": "/workspaces/zircon/docs"
+            "directoryPath": "/workspaces/zircon/dev/docs"
           }
         ]
       }
