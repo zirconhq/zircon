@@ -3,7 +3,9 @@
   "tasks": {
     "//#clean": {},
     "//#init": {},
-    "//#auth": {},
+    "//#auth": {
+      "cache": false
+    },
     "init": {
       "dependsOn": ["//#init", "^init"],
       "inputs": ["package.json", "pnpm-lock.yaml", ".npmrc"],
