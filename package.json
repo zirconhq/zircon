@@ -1,5 +1,6 @@
 {
   "name": "@zircon/zircon",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.15.1",
   "homepage": "https://github.com/zirconhq/zircon#readme",
   "bugs": {
